@@ -19,8 +19,9 @@ function clamp(value, min, max) {
 }
 
 function updateHeroProgress() {
-  const maxHeroScroll = heroStage.offsetHeight - device.clientHeight;
-  const rawProgress = maxHeroScroll > 0 ? device.scrollTop / maxHeroScroll : 0;
+  // Track the document scroll position, not an inner container, for iPhone full-page capture.
+  const maxHeroScroll = heroStage.offsetHeight - window.innerHeight;
+  const rawProgress = maxHeroScroll > 0 ? window.scrollY / maxHeroScroll : 0;
   const progress = clamp(rawProgress, 0, 1);
   const eased = 1 - Math.pow(1 - progress, 2);
 
@@ -42,12 +43,12 @@ const revealObserver = new IntersectionObserver(
     });
   },
   {
-    root: device,
+    root: null,
     threshold: 0.28,
   },
 );
 
 revealSections.forEach((section) => revealObserver.observe(section));
-device.addEventListener("scroll", updateHeroProgress, { passive: true });
+window.addEventListener("scroll", updateHeroProgress, { passive: true });
 window.addEventListener("resize", updateHeroProgress);
 updateHeroProgress();
