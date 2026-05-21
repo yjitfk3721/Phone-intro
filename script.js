@@ -1,4 +1,7 @@
+const device = document.querySelector(".device");
+const heroStage = document.querySelector(".hero-stage");
 const ctaButtons = document.querySelectorAll("[data-scroll-target]");
+const revealSections = document.querySelectorAll(".reveal");
 
 ctaButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -10,3 +13,41 @@ ctaButtons.forEach((button) => {
     });
   });
 });
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function updateHeroProgress() {
+  const maxHeroScroll = heroStage.offsetHeight - device.clientHeight;
+  const rawProgress = maxHeroScroll > 0 ? device.scrollTop / maxHeroScroll : 0;
+  const progress = clamp(rawProgress, 0, 1);
+  const eased = 1 - Math.pow(1 - progress, 2);
+
+  document.documentElement.style.setProperty("--hero-progress", progress.toFixed(3));
+  document.documentElement.style.setProperty("--hero-scale", (1 - 0.06 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--hero-translate", `${(-80 * eased).toFixed(1)}px`);
+  document.documentElement.style.setProperty("--hero-brightness", (1 + 0.08 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--hero-fade-opacity", (0.055 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--title-cover-opacity", eased.toFixed(3));
+  document.documentElement.style.setProperty("--cue-opacity", (0.72 * (1 - progress)).toFixed(3));
+}
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      }
+    });
+  },
+  {
+    root: device,
+    threshold: 0.28,
+  },
+);
+
+revealSections.forEach((section) => revealObserver.observe(section));
+device.addEventListener("scroll", updateHeroProgress, { passive: true });
+window.addEventListener("resize", updateHeroProgress);
+updateHeroProgress();

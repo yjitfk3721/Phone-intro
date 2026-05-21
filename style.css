@@ -3,6 +3,13 @@
   --muted: rgba(255, 255, 255, 0.72);
   --orange: #c8754d;
   --line: rgba(255, 255, 255, 0.14);
+  --hero-progress: 0;
+  --hero-scale: 1;
+  --hero-translate: 0px;
+  --hero-brightness: 1;
+  --hero-fade-opacity: 0;
+  --title-cover-opacity: 0;
+  --cue-opacity: 0.72;
 }
 
 * {
@@ -46,11 +53,42 @@ button {
   display: none;
 }
 
+.hero-stage {
+  min-height: 120vh;
+  background: #02050d;
+}
+
 .hero {
   position: relative;
+  position: sticky;
+  top: 0;
   min-height: 874px;
   overflow: hidden;
   background: #02050d;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero::before {
+  left: 0;
+  top: 106px;
+  z-index: 1;
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(180deg, rgba(2, 5, 13, 0.96), rgba(2, 5, 13, 0.82), transparent);
+  opacity: var(--title-cover-opacity);
+}
+
+.hero::after {
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.055);
+  opacity: var(--hero-fade-opacity);
 }
 
 .hero-image {
@@ -63,6 +101,10 @@ button {
   object-position: center top;
   user-select: none;
   -webkit-user-drag: none;
+  filter: brightness(var(--hero-brightness));
+  transform: translateY(var(--hero-translate)) scale(var(--hero-scale));
+  transform-origin: 50% 48%;
+  transition: transform 80ms linear, filter 80ms linear;
 }
 
 .hit-area {
@@ -74,6 +116,8 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 17px;
+  opacity: calc(1 - var(--hero-progress));
+  transition: opacity 80ms linear;
 }
 
 .cta {
@@ -83,6 +127,7 @@ button {
   color: transparent;
   background: transparent;
   cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -92,15 +137,39 @@ button {
 }
 
 .cta:active {
-  transform: scale(0.985);
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.specs {
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 2;
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 17px;
+  line-height: 1;
+  transform: translateX(-50%);
+  opacity: var(--cue-opacity);
+  animation: cue-breathe 1.8s ease-in-out infinite;
+}
+
+.narrative,
+.specs,
+.final-cta {
   min-height: 874px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 82px 34px 64px;
   background:
     radial-gradient(circle at 88% 8%, rgba(199, 117, 77, 0.16), transparent 168px),
     linear-gradient(180deg, #02050d 0%, #091122 100%);
+}
+
+.narrative {
+  gap: 24px;
 }
 
 .section-kicker {
@@ -112,13 +181,64 @@ button {
   text-transform: uppercase;
 }
 
-.specs h2 {
+.narrative h2,
+.specs h2,
+.final-cta h2 {
   margin: 0;
   color: var(--text);
   font-size: 42px;
   line-height: 1;
   font-weight: 400;
   letter-spacing: -0.03em;
+}
+
+.narrative > p:not(.section-kicker):not(.big-number) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.big-number {
+  margin: 8px 0 2px;
+  color: var(--text);
+  font-size: 76px;
+  line-height: 0.9;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+
+.camera {
+  justify-content: flex-start;
+  padding-top: 82px;
+}
+
+.camera-frame {
+  position: relative;
+  flex: 1;
+  min-height: 474px;
+  margin: 8px -34px -64px;
+  overflow: hidden;
+}
+
+.camera-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 44%;
+  opacity: 0.94;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .specs dl {
@@ -145,6 +265,28 @@ button {
   line-height: 1.55;
 }
 
+.final-cta {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.final-cta button {
+  margin-top: 34px;
+  min-width: 132px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.final-cta button:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -155,4 +297,17 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+@keyframes cue-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: calc(var(--cue-opacity) * 0.62);
+  }
+
+  50% {
+    transform: translate(-50%, 4px);
+    opacity: var(--cue-opacity);
+  }
 }
