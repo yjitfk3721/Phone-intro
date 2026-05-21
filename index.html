@@ -3,60 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iPhone 17 Pro Max 产品页 MVP</title>
+    <title>iPhone 17 Pro Max Hero</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="device" aria-label="iPhone 17 Pro Max 手机版产品页">
+    <main class="device" aria-label="iPhone 17 Pro Max 产品页">
       <section class="hero" aria-labelledby="product-title">
-        <div>
-          <p class="eyebrow">Cosmic Orange</p>
-          <h1 id="product-title">iPhone 17 Pro Max</h1>
-          <p class="summary">Pro 级性能、影像与续航，装进一台更醒目的旗舰手机。</p>
-        </div>
-        <div class="phone-art" aria-hidden="true">
-          <div class="camera-plate">
-            <span></span>
-            <span></span>
-            <span></span>
+        <p class="eyebrow">Cosmic Orange</p>
+
+        <div class="product-visual" aria-label="iPhone 17 Pro Max 产品视觉">
+          <div class="phone-back">
+            <div class="camera-island">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         </div>
+
+        <div class="hero-copy">
+          <h1 id="product-title">iPhone 17 Pro Max</h1>
+          <p>为高强度创作、游戏和全天候移动使用而生。</p>
+        </div>
+
+        <div class="cta-row" aria-label="产品操作">
+          <button class="primary-cta" type="button" data-scroll-target="specs">
+            了解更多
+          </button>
+          <button class="secondary-cta" type="button" data-scroll-target="specs">
+            查看参数
+          </button>
+        </div>
       </section>
 
-      <section class="cards" aria-label="产品信息入口">
-        <button class="info-card" type="button" data-panel="price">
-          <span class="card-label">产品售价</span>
-          <strong>起售价 ¥9,999</strong>
-          <span>多容量版本可选，适合换机与高端购机人群。</span>
-        </button>
-
-        <button class="info-card" type="button" data-panel="specs">
-          <span class="card-label">产品参数</span>
-          <strong>6.9 英寸 / A19 Pro</strong>
-          <span>显示、芯片、影像、续航等核心参数一览。</span>
-        </button>
-
-        <button class="info-card" type="button" data-panel="selling-points">
-          <span class="card-label">Top 3 卖点</span>
-          <strong>性能、影像、续航</strong>
-          <span>快速查看最值得被放大的三个购买理由。</span>
-        </button>
-
-        <button class="info-card" type="button" data-panel="compare">
-          <span class="card-label">机型对比</span>
-          <strong>Pro Max vs Pro</strong>
-          <span>用最短路径比较屏幕、续航与影像差异。</span>
-        </button>
-      </section>
-
-      <footer class="hint">点击任意模块查看详情</footer>
-
-      <div class="panel-backdrop" data-close-panel hidden></div>
-      <section class="detail-panel" aria-live="polite" aria-labelledby="panel-title" hidden>
-        <button class="close-button" type="button" data-close-panel aria-label="关闭详情">×</button>
-        <p class="panel-kicker" id="panel-kicker"></p>
-        <h2 id="panel-title"></h2>
-        <div id="panel-content"></div>
+      <section class="specs" id="specs" aria-labelledby="specs-title">
+        <p class="section-kicker">Tech Specs</p>
+        <h2 id="specs-title">更大屏幕，更长续航，更完整的 Pro 体验。</h2>
+        <p class="specs-intro">
+          Cosmic Orange 机身在深色背景中呈现温润金属反射，A19 Pro、ProMotion
+          显示屏与 Pro Fusion 影像系统共同组成旗舰体验。
+        </p>
+        <dl>
+          <dt>显示屏</dt>
+          <dd>6.9 英寸 ProMotion 全天候显示</dd>
+          <dt>芯片</dt>
+          <dd>A19 Pro，面向游戏、影像和 AI 任务</dd>
+          <dt>影像</dt>
+          <dd>Pro Fusion 摄像头系统，覆盖广角与长焦</dd>
+          <dt>容量</dt>
+          <dd>256GB / 512GB / 1TB</dd>
+        </dl>
       </section>
     </main>
 
