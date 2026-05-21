@@ -400,3 +400,65 @@ button {
     opacity: calc(1 - var(--hero-progress));
   }
 }
+
+.capture-mode {
+  --hero-progress: 0;
+  --hero-scale: 1;
+  --hero-translate: 0px;
+  --hero-brightness: 1;
+  --hero-fade-opacity: 0;
+  --title-cover-opacity: 0;
+  --cue-opacity: 0.72;
+}
+
+.capture-mode .hero-stage,
+.capture-mode .hero,
+.capture-mode .narrative,
+.capture-mode .specs,
+.capture-mode .final-cta {
+  min-height: auto;
+}
+
+.capture-mode .hero-stage {
+  background: #02050d;
+}
+
+.capture-mode .hero {
+  position: relative;
+  top: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.capture-mode .hero::before,
+.capture-mode .hero::after {
+  display: none;
+}
+
+.capture-mode .hero-image {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: none;
+  transform: none;
+  transition: none;
+}
+
+.capture-mode .explore-cue {
+  display: none;
+}
+
+.capture-mode .narrative,
+.capture-mode .specs,
+.capture-mode .final-cta {
+  padding-top: 70px;
+  padding-bottom: 54px;
+}
+
+.capture-mode .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}

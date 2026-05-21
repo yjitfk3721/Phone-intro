@@ -2,6 +2,11 @@ const device = document.querySelector(".device");
 const heroStage = document.querySelector(".hero-stage");
 const ctaButtons = document.querySelectorAll("[data-scroll-target]");
 const revealSections = document.querySelectorAll(".reveal");
+const isCaptureMode = new URLSearchParams(window.location.search).get("capture") === "1";
+
+if (isCaptureMode) {
+  document.body.classList.add("capture-mode");
+}
 
 ctaButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -34,21 +39,25 @@ function updateHeroProgress() {
   document.documentElement.style.setProperty("--cue-opacity", (0.72 * (1 - progress)).toFixed(3));
 }
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
-    });
-  },
-  {
-    root: null,
-    threshold: 0.28,
-  },
-);
+if (isCaptureMode) {
+  revealSections.forEach((section) => section.classList.add("is-visible"));
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    },
+    {
+      root: null,
+      threshold: 0.28,
+    },
+  );
 
-revealSections.forEach((section) => revealObserver.observe(section));
-window.addEventListener("scroll", updateHeroProgress, { passive: true });
-window.addEventListener("resize", updateHeroProgress);
-updateHeroProgress();
+  revealSections.forEach((section) => revealObserver.observe(section));
+  window.addEventListener("scroll", updateHeroProgress, { passive: true });
+  window.addEventListener("resize", updateHeroProgress);
+  updateHeroProgress();
+}
