@@ -23,13 +23,13 @@ function updateHeroProgress() {
   const maxHeroScroll = heroStage.offsetHeight - window.innerHeight;
   const rawProgress = maxHeroScroll > 0 ? window.scrollY / maxHeroScroll : 0;
   const progress = clamp(rawProgress, 0, 1);
-  const eased = 1 - Math.pow(1 - progress, 2);
+  const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
 
   document.documentElement.style.setProperty("--hero-progress", progress.toFixed(3));
-  document.documentElement.style.setProperty("--hero-scale", (1 - 0.06 * eased).toFixed(3));
-  document.documentElement.style.setProperty("--hero-translate", `${(-80 * eased).toFixed(1)}px`);
-  document.documentElement.style.setProperty("--hero-brightness", (1 + 0.08 * eased).toFixed(3));
-  document.documentElement.style.setProperty("--hero-fade-opacity", (0.055 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--hero-scale", (1 - 0.052 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--hero-translate", `${(-72 * eased).toFixed(1)}px`);
+  document.documentElement.style.setProperty("--hero-brightness", (1 + 0.065 * eased).toFixed(3));
+  document.documentElement.style.setProperty("--hero-fade-opacity", (0.046 * eased).toFixed(3));
   document.documentElement.style.setProperty("--title-cover-opacity", eased.toFixed(3));
   document.documentElement.style.setProperty("--cue-opacity", (0.72 * (1 - progress)).toFixed(3));
 }

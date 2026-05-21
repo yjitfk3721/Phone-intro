@@ -49,7 +49,7 @@ button {
 }
 
 .hero-stage {
-  min-height: 120vh;
+  min-height: 132vh;
   background: #02050d;
 }
 
@@ -99,7 +99,7 @@ button {
   filter: brightness(var(--hero-brightness));
   transform: translateY(var(--hero-translate)) scale(var(--hero-scale));
   transform-origin: 50% 48%;
-  transition: transform 80ms linear, filter 80ms linear;
+  transition: transform 120ms cubic-bezier(0.22, 0.61, 0.36, 1), filter 120ms linear;
 }
 
 .explore-cue {
@@ -145,7 +145,7 @@ button {
 .narrative,
 .specs,
 .final-cta {
-  min-height: 100vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -316,8 +316,8 @@ button {
 
 .reveal {
   opacity: 0;
-  transform: translateY(34px);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transform: translateY(28px);
+  transition: opacity 720ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 720ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .reveal.is-visible {
