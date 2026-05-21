@@ -386,6 +386,7 @@ button {
 
 .capture-mode .hero-stage {
   background: #02050d;
+  animation: none;
 }
 
 .capture-mode .hero {
@@ -393,6 +394,10 @@ button {
   top: auto;
   height: auto;
   overflow: visible;
+}
+
+.capture-mode .hero::after {
+  display: none;
 }
 
 .capture-mode .hero-image {
@@ -419,4 +424,11 @@ button {
   opacity: 1;
   transform: none;
   transition: none;
+}
+
+.capture-mode *,
+.capture-mode *::before,
+.capture-mode *::after {
+  animation: none !important;
+  transition: none !important;
 }
