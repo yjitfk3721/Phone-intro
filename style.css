@@ -184,7 +184,8 @@ button {
   letter-spacing: -0.03em;
 }
 
-.narrative > p:not(.section-kicker):not(.big-number) {
+.narrative > p:not(.section-kicker):not(.big-number),
+.final-cta > p:not(.section-kicker) {
   margin: 0;
   color: var(--muted);
   font-size: 18px;
@@ -200,20 +201,49 @@ button {
   letter-spacing: -0.05em;
 }
 
+.screen-glow {
+  position: relative;
+  width: 218px;
+  height: 138px;
+  margin-top: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(255, 210, 168, 0.22), transparent 58%),
+    linear-gradient(180deg, rgba(17, 31, 58, 0.88), rgba(3, 8, 18, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 80px rgba(199, 117, 77, 0.12);
+}
+
+.screen-glow::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.54), transparent);
+}
+
 .lens-detail {
   position: relative;
-  width: 188px;
-  height: 188px;
+  width: 204px;
+  height: 204px;
   margin-top: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 244, 235, 0.16);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 42% 38%, rgba(255, 255, 255, 0.9) 0 8px, transparent 9px),
-    radial-gradient(circle at 48% 46%, rgba(52, 68, 91, 0.92) 0 34px, #050912 35px 72px, #010307 73px);
+    radial-gradient(circle at 37% 32%, rgba(255, 255, 255, 0.9) 0 8px, transparent 9px),
+    radial-gradient(circle at 62% 58%, rgba(38, 61, 96, 0.74), transparent 36%),
+    radial-gradient(circle at 50% 50%, rgba(52, 68, 91, 0.96) 0 38px, #050912 39px 78px, #010307 79px);
   box-shadow:
-    inset 0 0 0 16px rgba(255, 255, 255, 0.025),
-    inset 0 0 34px rgba(255, 210, 168, 0.12),
-    0 28px 80px rgba(199, 117, 77, 0.15);
+    inset 0 0 0 18px rgba(255, 255, 255, 0.024),
+    inset 0 0 0 36px rgba(255, 255, 255, 0.018),
+    inset 0 0 42px rgba(255, 210, 168, 0.14),
+    0 30px 88px rgba(199, 117, 77, 0.17);
   overflow: hidden;
 }
 
@@ -224,6 +254,69 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
   background: radial-gradient(circle at 62% 58%, rgba(21, 32, 49, 0.8), transparent 58%);
+}
+
+.battery-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  width: 100%;
+  margin-top: 26px;
+  padding-top: 26px;
+}
+
+.battery-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 210, 168, 0.82), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 0 28px rgba(255, 210, 168, 0.14);
+}
+
+.battery-timeline span {
+  position: relative;
+  min-height: 54px;
+}
+
+.battery-timeline span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -23px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 18px rgba(255, 210, 168, 0.24);
+}
+
+.battery-timeline span::after {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
+}
+
+.battery-timeline span:nth-child(1)::after {
+  content: "8 AM";
+}
+
+.battery-timeline span:nth-child(2)::after {
+  content: "12 PM";
+}
+
+.battery-timeline span:nth-child(3)::after {
+  content: "6 PM";
+}
+
+.battery-timeline span:nth-child(4)::after {
+  content: "11 PM";
 }
 
 .reveal {
