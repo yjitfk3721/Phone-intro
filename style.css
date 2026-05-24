@@ -377,7 +377,6 @@ button {
 }
 
 .capture-mode .hero-stage,
-.capture-mode .hero,
 .capture-mode .narrative,
 .capture-mode .specs,
 .capture-mode .final-cta {
@@ -389,24 +388,40 @@ button {
   animation: none;
 }
 
-.capture-mode .hero {
-  position: relative;
-  top: auto;
-  height: auto;
-  overflow: visible;
+.capture-mode .hero,
+.capture-mode .hero-section {
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .capture-mode .hero::after {
   display: none;
 }
 
-.capture-mode .hero-image {
-  position: relative;
-  inset: auto;
-  width: 100%;
-  height: auto;
-  display: block;
-  animation: none;
+.capture-mode .hero,
+.capture-mode .hero-section,
+.capture-mode .hero-visual,
+.capture-mode .hero-image,
+.capture-mode .hero-content {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.capture-mode .hero img,
+.capture-mode img.hero-image,
+.capture-mode .hero-image img,
+.capture-mode .hero-visual img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  animation: none !important;
 }
 
 .capture-mode .explore-cue {
@@ -424,6 +439,17 @@ button {
   opacity: 1;
   transform: none;
   transition: none;
+}
+
+.capture-mode [data-reveal],
+.capture-mode .reveal,
+.capture-mode .is-hidden,
+.capture-mode .fade-in,
+.capture-mode .hero-title,
+.capture-mode .hero-copy {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 .capture-mode *,
